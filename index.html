@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Sulselbar - Comprehensive Executive Dashboard Q2 2025</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #99bb1c;
+            --primary-blue: #023259;
+            --light-green: rgba(153, 187, 28, 0.1);
+            --light-blue: rgba(2, 50, 89, 0.1);
+            --gradient-primary: linear-gradient(135deg, #023259 0%, #99bb1c 100%);
+            --gradient-card: linear-gradient(135deg, rgba(2, 50, 89, 0.05) 0%, rgba(153, 187, 28, 0.05) 100%);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .header-section {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .metric-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .icon-primary { background: var(--light-blue); color: var(--primary-blue); }
+        .icon-success { background: rgba(40, 167, 69, 0.1); color: #28a745; }
+        .icon-warning { background: rgba(255, 193, 7, 0.1); color: #ffc107; }
+        .icon-info { background: rgba(23, 162, 184, 0.1); color: #17a2b8; }
+        .icon-danger { background: rgba(220, 53, 69, 0.1); color: #dc3545; }
+
+        .metric-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .metric-label {
+            color: #6c757d;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .growth-indicator {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .growth-positive { background: rgba(40, 167, 69, 0.1); color: #28a745; }
+        .growth-negative { background: rgba(220, 53, 69, 0.1); color: #dc3545; }
+        .growth-neutral { background: rgba(108, 117, 125, 0.1); color: #6c757d; }
+
+        .section-header {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-card);
+            border-left: 6px solid var(--primary-green);
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-weight: 800;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-subtitle {
+            color: #6c757d;
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        .ratio-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ratio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary-green);
+        }
+
+        .ratio-card:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .ratio-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .ratio-name {
+            font-weight: 700;
+            color: var(--primary-blue);
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .ratio-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-green);
+            line-height: 1;
+        }
+
+        .ratio-comparison {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 0.75rem;
+        }
+
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+            background: #e9ecef;
+            margin-top: 1rem;
+        }
+
+        .progress-bar {
+            background: var(--gradient-primary);
+            border-radius: 4px;
+        }
+
+        .syariah-hero {
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .syariah-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+        }
+
+        .syariah-hero .row {
+            position: relative;
+            z-index: 2;
+        }
+
+        .peer-ranking-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-card);
+            height: 100%;
+        }
+
+        .ranking-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 0.75rem;
+            background: var(--light-blue);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .ranking-item:hover {
+            background: var(--light-green);
+            transform: translateX(4px);
+        }
+
+        .ranking-position {
+            background: var(--primary-green);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+        }
+
+        .outlet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(2, 50, 89, 0.3);
+        }
+
+        .alert-executive {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .badge-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .badge-excellent { background: rgba(40, 167, 69, 0.2); color: #28a745; }
+        .badge-good { background: rgba(23, 162, 184, 0.2); color: #17a2b8; }
+        .badge-warning { background: rgba(255, 193, 7, 0.2); color: #ffc107; }
+        .badge-strong { background: var(--light-green); color: var(--primary-green); }
+
+        .nav-tabs .nav-link {
+            border: none;
+            color: var(--primary-blue);
+            font-weight: 600;
+            padding: 1rem 2rem;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .nav-tabs .nav-link.active {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .tab-content {
+            background: white;
+            border-radius: 0 16px 16px 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-card);
+        }
+
+        .comparison-table {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+        }
+
+        .table th {
+            background: var(--primary-blue);
+            color: white;
+            font-weight: 600;
+            border: none;
+            padding: 1rem;
+        }
+
+        .table td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-color: #dee2e6;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-in {
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @media (max-width: 768px) {
+            .metric-value { font-size: 1.8rem; }
+            .ratio-value { font-size: 1.5rem; }
+            .section-title { font-size: 1.4rem; }
+            .outlet-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header-section">
+        <div class="container header-content">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-3">
+                        <i class="fas fa-university me-3"></i>
+                        Bank Sulselbar Executive Dashboard
+                    </h1>
+                    <p class="lead mb-2">Narasi Komprehensif Kinerja Q2 2025</p>
+                    <p class="mb-0 opacity-75">Complete Financial Performance & Strategic Analysis</p>
+                </div>
+                <div class="col-lg-4 text-end">
+                    <div class="d-flex flex-column align-items-end">
+                        <div class="badge bg-light text-dark fs-5 mb-2 px-3 py-2">Q2 2025</div>
+                        <div class="text-light opacity-75" id="dashboard-time">Dashboard Updated: Juli 2025</div>
+                        <button class="btn btn-outline-light btn-sm mt-2" onclick="window.print()">
+                            <i class="fas fa-print me-2"></i>Print Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid px-4">
+        <!-- Executive Summary -->
+        <div class="alert-executive fade-in">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h3 class="mb-3">
+                        <i class="fas fa-chart-line me-2"></i>
+                        Executive Summary - Q2 2025
+                    </h3>
+                    <p class="mb-3 fs-5">Bank Sulselbar menunjukkan <strong>kinerja sangat positif</strong> dengan pertumbuhan aset yang kuat, peningkatan DPK yang solid, dan profitabilitas yang meningkat signifikan. Unit Syariah mencatat pertumbuhan <strong>luar biasa 56,14%</strong> YoY.</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <div class="border border-light rounded-3 p-3">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="h3 mb-2">RANKING 9-10</div>
+                        <div>dari 27 BPD-SI Indonesia</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs mb-0" id="mainTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="financial-tab" data-bs-toggle="tab" data-bs-target="#financial" type="button" role="tab">
+                    <i class="fas fa-chart-bar me-2"></i>Kinerja Finansial
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="ratios-tab" data-bs-toggle="tab" data-bs-target="#ratios" type="button" role="tab">
+                    <i class="fas fa-calculator me-2"></i>Rasio Keuangan
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="syariah-tab" data-bs-toggle="tab" data-bs-target="#syariah" type="button" role="tab">
+                    <i class="fas fa-star me-2"></i>Unit Syariah
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="peer-tab" data-bs-toggle="tab" data-bs-target="#peer" type="button" role="tab">
+                    <i class="fas fa-users me-2"></i>Peer Comparison
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="mainTabContent">
+            <!-- Financial Performance Tab -->
+            <div class="tab-pane fade show active" id="financial" role="tabpanel">
+                <!-- A. Financial Highlight Section -->
+                <div class="section-header fade-in">
+                    <h2 class="section-title">
+                        <i class="fas fa-chart-line me-3"></i>
+                        A. Financial Highlight Triwulan II 2025
+                    </h2>
+                    <p class="section-subtitle">Gambaran komprehensif kinerja aset, kredit, dana pihak ketiga, dan profitabilitas</p>
+                </div>
+
+                <!-- 1. Kinerja Aset -->
+                <h3 class="h4 mb-3 text-primary fw-bold">1. Kinerja Aset</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-6">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-primary">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div class="metric-value">33,49 T</div>
+                            <div class="metric-label">Total Aset Juni 2025</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+10,27% YoY
+                            </div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>+3,12 T</strong> dibanding Juni 2024 (30,37 T)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-success">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="metric-value">10,27%</div>
+                            <div class="metric-label">Pertumbuhan Aset YoY</div>
+                            <div class="badge badge-excellent mt-2">EKSPANSI SOLID</div>
+                            <div class="ratio-comparison mt-2">
+                                Menunjukkan ekspansi yang solid dalam skala usaha bank
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Kinerja Kredit dan Pembiayaan -->
+                <h3 class="h4 mb-3 text-primary fw-bold">2. Kinerja Kredit dan Pembiayaan</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-4">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-warning">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="metric-value">23,47 T</div>
+                            <div class="metric-label">Total Kredit & Pembiayaan</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+2,82% YoY
+                            </div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>+643,89 M</strong> vs Juni 2024
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-info">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="metric-value">21,81 T</div>
+                            <div class="metric-label">Kredit Konvensional</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+2,13% YoY
+                            </div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>+454,31 M</strong> vs Juni 2024
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-success">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="metric-value">1,66 T</div>
+                            <div class="metric-label">Pembiayaan Syariah</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+12,89% YoY
+                            </div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>+189,58 M</strong> vs Juni 2024
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Kinerja Dana Pihak Ketiga -->
+                <h3 class="h4 mb-3 text-primary fw-bold">3. Kinerja Dana Pihak Ketiga (DPK)</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-3">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-primary">
+                                <i class="fas fa-piggy-bank"></i>
+                            </div>
+                            <div class="metric-value">22,33 T</div>
+                            <div class="metric-label">Total DPK</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+8,27% YoY
+                            </div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>+1,70 T</strong> vs Juni 2024
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-info">
+                                <i class="fas fa-money-check"></i>
+                            </div>
+                            <div class="metric-value">6,77 T</div>
+                            <div class="metric-label">Giro</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+0,15% YoY
+                            </div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>+9,81 M</strong> vs Juni 2024
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-success">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div class="metric-value">5,94 T</div>
+                            <div class="metric-label">Tabungan</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+6,43% YoY
+                            </div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>+359,19 M</strong> vs Juni 2024
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-warning">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div class="metric-value">9,62 T</div>
+                            <div class="metric-label">Deposito</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+16,14% YoY
+                            </div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>+1,34 T</strong> vs Juni 2024
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Kinerja Profitabilitas -->
+                <h3 class="h4 mb-3 text-primary fw-bold">4. Kinerja Profitabilitas</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-6">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-success">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="metric-value">1,57 T</div>
+                            <div class="metric-label">Total Pendapatan</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+2,50% YoY
+                            </div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>+38,37 M</strong> vs Juni 2024 (1,53 T)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-success">
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                            <div class="metric-value">1,19 T</div>
+                            <div class="metric-label">Total Biaya</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-down me-1"></i>-6,59% YoY
+                            </div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>-84,24 M</strong> vs Juni 2024 (1,27 T)
+                                <br><span class="badge badge-excellent mt-1">EFISIENSI MEMBAIK</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Kinerja Laba -->
+                <h3 class="h4 mb-3 text-primary fw-bold">5. Kinerja Laba</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-6">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-success">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="metric-value">377 M</div>
+                            <div class="metric-label">Laba Sebelum Pajak</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+13,82% YoY
+                            </div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>+45,87 M</strong> vs Juni 2024 (331 M)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-success">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <div class="metric-value">294 M</div>
+                            <div class="metric-label">Laba Bersih</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+15,50% YoY
+                            </div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>+39,53 M</strong> vs Juni 2024 (255 M)
+                                <br><span class="badge badge-excellent mt-1">PROFITABILITAS SANGAT POSITIF</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Ratios Tab -->
+            <div class="tab-pane fade" id="ratios" role="tabpanel">
+                <div class="section-header fade-in">
+                    <h2 class="section-title">
+                        <i class="fas fa-calculator me-3"></i>
+                        B. Kinerja Rasio Keuangan Triwulan II 2025
+                    </h2>
+                    <p class="section-subtitle">Analisis mendalam rasio profitabilitas, efisiensi, likuiditas, dan manajemen risiko</p>
+                </div>
+
+                <!-- 1. Rasio Profitabilitas -->
+                <h3 class="h4 mb-3 text-primary fw-bold">1. Rasio Profitabilitas</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-4">
+                        <div class="ratio-card fade-in">
+                            <div class="ratio-header">
+                                <div>
+                                    <div class="ratio-name">KPMM (Kecukupan Permodalan)</div>
+                                    <div class="ratio-value">25,59%</div>
+                                </div>
+                                <div class="card-icon icon-success">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                            </div>
+                            <div class="growth-indicator growth-negative">
+                                <i class="fas fa-arrow-down me-1"></i>-2,79% vs Juni 2024
+                            </div>
+                            <div class="ratio-comparison">
+                                <span class="badge badge-excellent">SANGAT MEMADAI</span><br>
+                                Jauh di atas minimum regulatory 8%<br>
+                                Juni 2024: 28,38%
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ratio-card fade-in">
+                            <div class="ratio-header">
+                                <div>
+                                    <div class="ratio-name">ROA (Return on Assets)</div>
+                                    <div class="ratio-value">2,31%</div>
+                                </div>
+                                <div class="card-icon icon-success">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                            </div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+0,11% vs Juni 2024
+                            </div>
+                            <div class="ratio-comparison">
+                                <span class="badge badge-excellent">SANGAT SEHAT</span><br>
+                                Efektivitas manajemen aset membaik<br>
+                                Juni 2024: 2,20%
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 77%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ratio-card fade-in">
+                            <div class="ratio-header">
+                                <div>
+                                    <div class="ratio-name">ROE (Return on Equity)</div>
+                                    <div class="ratio-value">12,07%</div>
+                                </div>
+                                <div class="card-icon icon-success">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                            </div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+1,1% vs Juni 2024
+                            </div>
+                            <div class="ratio-comparison">
+                                <span class="badge badge-excellent">EXCELLENT</span><br>
+                                Tingkat pengembalian baik bagi pemegang saham<br>
+                                Juni 2024: 10,98%
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Rasio Efisiensi -->
+                <h3 class="h4 mb-3 text-primary fw-bold">2. Rasio Efisiensi</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-6">
+                        <div class="ratio-card fade-in">
+                            <div class="ratio-header">
+                                <div>
+                                    <div class="ratio-name">NIM (Net Interest Margin)</div>
+                                    <div class="ratio-value">5,08%</div>
+                                </div>
+                                <div class="card-icon icon-warning">
+                                    <i class="fas fa-balance-scale"></i>
+                                </div>
+                            </div>
+                            <div class="growth-indicator growth-negative">
+                                <i class="fas fa-arrow-down me-1"></i>-0,39% vs Juni 2024
+                            </div>
+                            <div class="ratio-comparison">
+                                <span class="badge badge-good">KOMPETITIF</span><br>
+                                Masih berada pada level yang kompetitif<br>
+                                Juni 2024: 5,48%
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="ratio-card fade-in">
+                            <div class="ratio-header">
+                                <div>
+                                    <div class="ratio-name">BOPO (Beban vs Pendapatan Operasional)</div>
+                                    <div class="ratio-value">75,15%</div>
+                                </div>
+                                <div class="card-icon icon-success">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                            </div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-down me-1"></i>-2,21% vs Juni 2024
+                            </div>
+                            <div class="ratio-comparison">
+                                <span class="badge badge-excellent">EFISIEN</span><br>
+                                Peningkatan efisiensi operasional<br>
+                                Juni 2024: 77,36%
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Rasio Likuiditas dan Kredit -->
+                <h3 class="h4 mb-3 text-primary fw-bold">3. Rasio Likuiditas dan Kredit</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-4">
+                        <div class="ratio-card fade-in">
+                            <div class="ratio-header">
+                                <div>
+                                    <div class="ratio-name">LDR (Loan to Deposit Ratio)</div>
+                                    <div class="ratio-value">105,08%</div>
+                                </div>
+                                <div class="card-icon icon-info">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                            </div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-down me-1"></i>-5,57% vs Juni 2024
+                            </div>
+                            <div class="ratio-comparison">
+                                <span class="badge badge-good">OPTIMAL</span><br>
+                                Perbaikan optimalisasi fungsi intermediasi<br>
+                                Juni 2024: 110,65%
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-info" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ratio-card fade-in">
+                            <div class="ratio-header">
+                                <div>
+                                    <div class="ratio-name">NPL Gross</div>
+                                    <div class="ratio-value">3,13%</div>
+                                </div>
+                                <div class="card-icon icon-warning">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                            </div>
+                            <div class="growth-indicator growth-negative">
+                                <i class="fas fa-arrow-up me-1"></i>+0,75% vs Juni 2024
+                            </div>
+                            <div class="ratio-comparison">
+                                <span class="badge badge-warning">PERLU MONITORING</span><br>
+                                Masih di bawah threshold maksimal 5%<br>
+                                Juni 2024: 2,38%
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" style="width: 63%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ratio-card fade-in">
+                            <div class="ratio-header">
+                                <div>
+                                    <div class="ratio-name">NPL Net</div>
+                                    <div class="ratio-value">1,01%</div>
+                                </div>
+                                <div class="card-icon icon-success">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                            <div class="growth-indicator growth-negative">
+                                <i class="fas fa-arrow-up me-1"></i>+0,33% vs Juni 2024
+                            </div>
+                            <div class="ratio-comparison">
+                                <span class="badge badge-good">TERKENDALI</span><br>
+                                Kualitas kredit masih terjaga<br>
+                                Juni 2024: 0,68%
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 20%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Syariah Unit Tab -->
+            <div class="tab-pane fade" id="syariah" role="tabpanel">
+                <div class="section-header fade-in">
+                    <h2 class="section-title">
+                        <i class="fas fa-star me-3"></i>
+                        C. Kinerja Unit Syariah Triwulan II 2025
+                    </h2>
+                    <p class="section-subtitle">Market Leader Performance dengan pertumbuhan luar biasa</p>
+                </div>
+
+                <!-- Hero Section for Syariah -->
+                <div class="syariah-hero fade-in mb-4">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8">
+                            <h3 class="mb-4">
+                                <i class="fas fa-rocket me-2"></i>
+                                PERTUMBUHAN LUAR BIASA (Growth YoY)
+                            </h3>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="display-6 me-3">📈</div>
+                                        <div>
+                                            <div class="h2 mb-1">+56,14%</div>
+                                            <div class="h5 mb-0">Asset Growth</div>
+                                            <small>Market Leader Performance</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="display-6 me-3">💰</div>
+                                        <div>
+                                            <div class="h2 mb-1">+37,51%</div>
+                                            <div class="h5 mb-0">Profit Growth</div>
+                                            <small>Strong Recovery</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-check-circle me-2"></i>Pertumbuhan tertinggi di antara semua indikator</li>
+                                        <li class="mb-2"><i class="fas fa-check-circle me-2"></i>Jauh melampaui rata-rata industri (~15-20%)</li>
+                                        <li class="mb-2"><i class="fas fa-check-circle me-2"></i>Didukung strategi DBLM dan ekspansi outlet masif</li>
+                                        <li class="mb-2"><i class="fas fa-check-circle me-2"></i>Recovery dramatis dari TW I 2025</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <div class="border border-light rounded-3 p-4">
+                                <div style="font-size: 4rem; margin-bottom: 1rem;">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div class="h1 mb-2">101</div>
+                                <div class="h5 mb-2">Outlet Syariah</div>
+                                <div class="small">248% Growth dalam 18 bulan</div>
+                                <div class="small">(29 → 101 outlet)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Financial Performance Metrics -->
+                <h3 class="h4 mb-3 text-primary fw-bold">1. Key Financial Performance Metrics TW II 2025</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-3">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-primary">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div class="metric-value">3,19 T</div>
+                            <div class="metric-label">Total Aset</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+56,14% YoY
+                            </div>
+                            <div class="badge badge-excellent mt-2">OUTSTANDING</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-success">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="metric-value">47,73 M</div>
+                            <div class="metric-label">Laba Bersih</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+37,51% YoY
+                            </div>
+                            <div class="badge badge-excellent mt-2">EXCELLENT</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-warning">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="metric-value">1,66 T</div>
+                            <div class="metric-label">Pembiayaan</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+12,89% YoY
+                            </div>
+                            <div class="badge badge-good mt-2">SOLID</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-info">
+                                <i class="fas fa-piggy-bank"></i>
+                            </div>
+                            <div class="metric-value">1,52 T</div>
+                            <div class="metric-label">DPK Syariah</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-arrow-up me-1"></i>+8,86% YoY
+                            </div>
+                            <div class="badge badge-good mt-2">STABLE</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CASA Ratio - Industry Champion -->
+                <h3 class="h4 mb-3 text-primary fw-bold">2. Kualitas Funding - Industry Champion</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-8">
+                        <div class="metric-card fade-in">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card-icon icon-success">
+                                        <i class="fas fa-trophy"></i>
+                                    </div>
+                                    <div class="metric-value">69,23%</div>
+                                    <div class="metric-label">CASA Ratio</div>
+                                    <div class="badge badge-excellent mt-2">OUTSTANDING PERFORMANCE</div>
+                                    <div class="ratio-comparison mt-2">
+                                        <strong>38-54% di atas rata-rata industry</strong><br>
+                                        Industry Standard: 40-50%
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="fw-bold mb-3">Composition Breakdown TW II 2025:</h6>
+                                    <div class="mb-2">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Giro</span>
+                                            <span><strong>537,6M (35,4%)</strong></span>
+                                        </div>
+                                        <div class="progress" style="height: 6px;">
+                                            <div class="progress-bar" style="width: 35.4%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-2">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Tabungan</span>
+                                            <span><strong>514,2M (33,8%)</strong></span>
+                                        </div>
+                                        <div class="progress" style="height: 6px;">
+                                            <div class="progress-bar bg-success" style="width: 33.8%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-2">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Deposito</span>
+                                            <span><strong>467,6M (30,7%)</strong></span>
+                                        </div>
+                                        <div class="progress" style="height: 6px;">
+                                            <div class="progress-bar bg-warning" style="width: 30.7%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="metric-card fade-in">
+                            <h6 class="fw-bold mb-3">Strategic Advantage:</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Cost Efficiency:</strong> Dana murah mendominasi</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Stability:</strong> Giro & tabungan lebih stabil</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Pricing Power:</strong> Fleksibilitas margin</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i><strong>Competitive Moat:</strong> Susah ditiru</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market Share & Positioning -->
+                <h3 class="h4 mb-3 text-primary fw-bold">3. Market Share & Positioning</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-6">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-primary">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div class="metric-value">9,53%</div>
+                            <div class="metric-label">Share Aset UUS dalam Total Bank</div>
+                            <div class="growth-indicator growth-positive">
+                                <i class="fas fa-check me-1"></i>Melampaui Target 2024: 9,51%
+                            </div>
+                            <div class="badge badge-excellent mt-2">TARGET ACHIEVED ✅</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="metric-card fade-in">
+                            <h6 class="fw-bold mb-3">🎯 Strategic Significance:</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i>Kontribusi bisnis syariah semakin signifikan</li>
+                                <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i>Diversifikasi revenue stream bank</li>
+                                <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i>Positioning sebagai dual banking leader</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outlet Expansion Overview -->
+                <h3 class="h4 mb-3 text-primary fw-bold">4. Overview Ekspansi Outlet</h3>
+                <div class="outlet-grid">
+                    <div class="metric-card fade-in">
+                        <div class="card-icon icon-warning">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="metric-value">29</div>
+                        <div class="metric-label">Kondisi Awal (2024)</div>
+                        <div class="ratio-comparison mt-2">Starting point ekspansi</div>
+                    </div>
+                    <div class="metric-card fade-in">
+                        <div class="card-icon icon-success">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="metric-value">101</div>
+                        <div class="metric-label">Kondisi Juni 2025</div>
+                        <div class="badge badge-excellent mt-2">MASSIVE EXPANSION</div>
+                    </div>
+                    <div class="metric-card fade-in">
+                        <div class="card-icon icon-primary">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="metric-value">+72</div>
+                        <div class="metric-label">Net Addition Outlet Baru</div>
+                        <div class="ratio-comparison mt-2">Rata-rata ~4 outlet per bulan</div>
+                    </div>
+                    <div class="metric-card fade-in">
+                        <div class="card-icon icon-info">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="metric-value">248%</div>
+                        <div class="metric-label">Persentase Pertumbuhan</div>
+                        <div class="ratio-comparison mt-2">Dalam waktu kurang dari 18 bulan</div>
+                    </div>
+                </div>
+
+                <!-- Detailed Composition -->
+                <h3 class="h4 mb-3 text-primary fw-bold">5. Komposisi Detail 101 Outlet Syariah</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-6">
+                        <div class="ratio-card fade-in">
+                            <h6 class="fw-bold mb-3">Dedicated Syariah Units</h6>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <div class="text-center">
+                                        <div class="h2 text-primary">1</div>
+                                        <div class="small">Unit Usaha Syariah (UUS)</div>
+                                        <div class="small text-muted">Headquarters</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-center">
+                                        <div class="h2 text-success">4</div>
+                                        <div class="small">Kantor Cabang Syariah (KCS)</div>
+                                        <div class="small text-muted">Full Service Branches</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="ratio-card fade-in">
+                            <h6 class="fw-bold mb-3">Conventional Branches with Syariah Services</h6>
+                            <div class="row mb-3">
+                                <div class="col-4">
+                                    <div class="text-center">
+                                        <div class="h2 text-info">31</div>
+                                        <div class="small">KCK dengan layanan syariah</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-center">
+                                        <div class="h2 text-warning">6</div>
+                                        <div class="small">KCP dengan layanan syariah</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-center">
+                                        <div class="h2 text-danger">60</div>
+                                        <div class="small">KF dengan layanan syariah</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Geographic Distribution -->
+                <h3 class="h4 mb-3 text-primary fw-bold">6. Geographic Distribution Strategy</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-4">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-primary">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="metric-label">PRIMARY MARKETS</div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>SULSEL (Sulawesi Selatan):</strong> Market utama dengan density tinggi<br>
+                                <strong>SULBAR (Sulawesi Barat):</strong> Ekspansi ke market baru
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-success">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <div class="metric-label">STRATEGIC PLACEMENT</div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <h6 class="fw-bold">Urban Centers</h6>
+                                    <ul class="list-unstyled small">
+                                        <li>• Makassar</li>
+                                        <li>• Parepare</li>
+                                        <li>• Palopo</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="fw-bold">Semi-Urban Areas</h6>
+                                    <ul class="list-unstyled small">
+                                        <li>• Kabupaten-kabupaten besar</li>
+                                        <li>• Pusat ekonomi regional</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="fw-bold">Rural Penetration</h6>
+                                    <ul class="list-unstyled small">
+                                        <li>• Kecamatan strategis</li>
+                                        <li>• Desa-desa potensial</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Peer Comparison Tab -->
+            <div class="tab-pane fade" id="peer" role="tabpanel">
+                <div class="section-header fade-in">
+                    <h2 class="section-title">
+                        <i class="fas fa-users me-3"></i>
+                        D. Perbandingan Kinerja Skala Usaha dan Profitabilitas
+                    </h2>
+                    <p class="section-subtitle">Data Maret 2025 - Peer Group BPD Seluruh Indonesia (27 Bank)</p>
+                </div>
+
+                <!-- Overall Positioning -->
+                <div class="row mb-4">
+                    <div class="col-lg-8">
+                        <div class="peer-ranking-card fade-in">
+                            <h3 class="h5 mb-4">
+                                <i class="fas fa-trophy me-2"></i>
+                                Positioning Bank Sulselbar di Antara 27 BPD-SI
+                            </h3>
+                            <div class="ranking-item">
+                                <div class="d-flex align-items-center">
+                                    <div class="ranking-position">9</div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold">Laba Sebelum Pajak</div>
+                                        <div class="small text-muted">Rp 186,36 miliar (Maret 2025)</div>
+                                    </div>
+                                </div>
+                                <div class="badge badge-excellent">EXCELLENT</div>
+                            </div>
+                            <div class="ranking-item">
+                                <div class="d-flex align-items-center">
+                                    <div class="ranking-position">10</div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold">Total Aset</div>
+                                        <div class="small text-muted">Rp 32,52 triliun (Maret 2025)</div>
+                                    </div>
+                                </div>
+                                <div class="badge badge-strong">STRONG</div>
+                            </div>
+                            <div class="ranking-item">
+                                <div class="d-flex align-items-center">
+                                    <div class="ranking-position">10</div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold">ROA & BOPO</div>
+                                        <div class="small text-muted">Balanced Performance</div>
+                                    </div>
+                                </div>
+                                <div class="badge badge-good">CONSISTENT</div>
+                            </div>
+                            <div class="ranking-item">
+                                <div class="d-flex align-items-center">
+                                    <div class="ranking-position">14</div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold">NPL Gross</div>
+                                        <div class="small text-muted">2,65% (Maret 2025)</div>
+                                    </div>
+                                </div>
+                                <div class="badge badge-good">TERKENDALI</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-primary">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <div class="metric-value">9-14</div>
+                            <div class="metric-label">Range Ranking</div>
+                            <div class="badge badge-excellent mt-2">TOP TIER PERFORMANCE</div>
+                            <div class="ratio-comparison mt-3">
+                                <strong>Key Insights:</strong><br>
+                                • Efisiensi operasional superior<br>
+                                • Peringkat profitabilitas > aset<br>
+                                • Manajemen risiko prudent<br>
+                                • Konsistensi remarkable
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Performance Metrics -->
+                <h3 class="h4 mb-3 text-primary fw-bold">1. Posisi Aset & Profitabilitas</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-6">
+                        <div class="ratio-card fade-in">
+                            <div class="ratio-header">
+                                <div>
+                                    <div class="ratio-name">Posisi Aset - Ranking #10</div>
+                                    <div class="ratio-value">32,52 T</div>
+                                </div>
+                                <div class="card-icon icon-primary">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                            </div>
+                            <div class="ratio-comparison">
+                                <strong>Pencapaian:</strong><br>
+                                • Skala usaha yang signifikan dalam konteks perbankan daerah<br>
+                                • Posisi kompetitif di tengah-tengah peringkat nasional<br>
+                                • Fondasi yang kuat untuk ekspansi dan pengembangan layanan
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="ratio-card fade-in">
+                            <div class="ratio-header">
+                                <div>
+                                    <div class="ratio-name">Laba Sebelum Pajak - Ranking #9</div>
+                                    <div class="ratio-value">186,36 M</div>
+                                </div>
+                                <div class="card-icon icon-success">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                            </div>
+                            <div class="ratio-comparison">
+                                <strong>Pencapaian:</strong><br>
+                                • Efisiensi operasional superior dengan peringkat profitabilitas lebih tinggi dari aset<br>
+                                • Optimalisasi revenue generation dari basis aset<br>
+                                • Margin keuntungan sehat menunjukkan manajemen efektif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profitability & Efficiency Ratios -->
+                <h3 class="h4 mb-3 text-primary fw-bold">2. Kinerja Rasio Profitabilitas dan Efisiensi</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-6">
+                        <div class="ratio-card fade-in">
+                            <div class="ratio-header">
+                                <div>
+                                    <div class="ratio-name">ROA - Ranking #10</div>
+                                    <div class="ratio-value">2,31%</div>
+                                </div>
+                                <div class="card-icon icon-success">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                            </div>
+                            <div class="ratio-comparison">
+                                <strong>Analisis:</strong><br>
+                                • Kondisi sangat sehat sesuai ketentuan regulator (>1,5%)<br>
+                                • Efektivitas pengelolaan aset yang menghasilkan return optimal<br>
+                                • Konsistensi dengan posisi aset menunjukkan keseimbangan skala dan efisiensi
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 77%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="ratio-card fade-in">
+                            <div class="ratio-header">
+                                <div>
+                                    <div class="ratio-name">BOPO - Ranking #10</div>
+                                    <div class="ratio-value">75,70%</div>
+                                </div>
+                                <div class="card-icon icon-success">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                            </div>
+                            <div class="ratio-comparison">
+                                <strong>Analisis:</strong><br>
+                                • Efisiensi operasional baik dengan rasio jauh di bawah threshold regulator (85%)<br>
+                                • Pengendalian biaya yang efektif dalam operasional sehari-hari<br>
+                                • Ruang untuk optimalisasi lebih lanjut menuju best practice industry
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Management Performance -->
+                <h3 class="h4 mb-3 text-primary fw-bold">3. Kinerja Manajemen Risiko</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-6">
+                        <div class="ratio-card fade-in">
+                            <div class="ratio-header">
+                                <div>
+                                    <div class="ratio-name">CAR (Capital Adequacy Ratio)</div>
+                                    <div class="ratio-value">28,30%</div>
+                                </div>
+                                <div class="card-icon icon-success">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                            </div>
+                            <div class="badge badge-excellent mb-2">SANGAT KUAT</div>
+                            <div class="ratio-comparison">
+                                <strong>Keunggulan:</strong><br>
+                                • Buffer permodalan sangat kuat untuk mengantisipasi risiko<br>
+                                • Kapasitas ekspansi kredit besar untuk mendukung perekonomian daerah<br>
+                                • Kredibilitas tinggi dalam menghadapi volatilitas ekonomi<br>
+                                • Potensi multiplier effect untuk akselerasi pembangunan ekonomi Sulawesi Selatan
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="ratio-card fade-in">
+                            <div class="ratio-header">
+                                <div>
+                                    <div class="ratio-name">NPL Gross - Ranking #14</div>
+                                    <div class="ratio-value">2,65%</div>
+                                </div>
+                                <div class="card-icon icon-warning">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                            </div>
+                            <div class="badge badge-good mb-2">DALAM BATAS WAJAR</div>
+                            <div class="ratio-comparison">
+                                <strong>Analisis:</strong><br>
+                                • Manajemen risiko kredit yang prudent dalam era ekspansi<br>
+                                • Kualitas portofolio kredit yang terjaga meski dalam pertumbuhan<br>
+                                • Antisipasi yang baik terhadap potensi risiko kredit di masa depan<br>
+                                • Masih dalam batas wajar di bawah threshold maksimal 5%
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" style="width: 53%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Competitive Positioning Analysis -->
+                <h3 class="h4 mb-3 text-primary fw-bold">4. Analisis Positioning Strategis</h3>
+                <div class="row mb-4">
+                    <div class="col-lg-4">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="metric-label">KONSISTENSI KINERJA</div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>Remarkable Consistency:</strong><br>
+                                • Posisi ke-9 hingga ke-14 dalam berbagai metrik<br>
+                                • Tidak ada outlier negatif<br>
+                                • Peringkat profitabilitas lebih tinggi dari aset<br>
+                                • Manajemen risiko yang balanced
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-primary">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="metric-label">KEKUATAN KOMPETITIF</div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>Competitive Advantages:</strong><br>
+                                • Modal sangat kuat (CAR 28,30%)<br>
+                                • Profitabilitas sehat (ROA 2,31%)<br>
+                                • Efisiensi operasional baik (BOPO 75,70%)<br>
+                                • Skala usaha signifikan (aset Rp32,52 triliun)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="metric-card fade-in">
+                            <div class="card-icon icon-warning">
+                                <i class="fas fa-target"></i>
+                            </div>
+                            <div class="metric-label">AREA FOKUS</div>
+                            <div class="ratio-comparison mt-2">
+                                <strong>Improvement Areas:</strong><br>
+                                • Monitoring NPL secara ketat<br>
+                                • Optimalisasi efisiensi lebih lanjut<br>
+                                • Pertahankan kualitas kredit<br>
+                                • Leverage modal kuat untuk ekspansi
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison Table -->
+                <h3 class="h4 mb-3 text-primary fw-bold">5. Tabel Perbandingan Komprehensif</h3>
+                <div class="comparison-table fade-in mb-4">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Indikator</th>
+                                <th>Bank Sulselbar</th>
+                                <th>Ranking (dari 27)</th>
+                                <th>Status</th>
+                                <th>Benchmark</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Total Aset</strong></td>
+                                <td>Rp 32,52 T</td>
+                                <td class="text-center"><span class="badge bg-primary">#10</span></td>
+                                <td><span class="badge badge-strong">Strong</span></td>
+                                <td>Skala usaha signifikan</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Laba Sebelum Pajak</strong></td>
+                                <td>Rp 186,36 M</td>
+                                <td class="text-center"><span class="badge bg-success">#9</span></td>
+                                <td><span class="badge badge-excellent">Excellent</span></td>
+                                <td>Efisiensi superior</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ROA</strong></td>
+                                <td>2,31%</td>
+                                <td class="text-center"><span class="badge bg-primary">#10</span></td>
+                                <td><span class="badge badge-excellent">Sangat Sehat</span></td>
+                                <td>Min. Regulator: >1,5%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>BOPO</strong></td>
+                                <td>75,70%</td>
+                                <td class="text-center"><span class="badge bg-primary">#10</span></td>
+                                <td><span class="badge badge-good">Efisien</span></td>
+                                <td>Max. Regulator: 85%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CAR</strong></td>
+                                <td>28,30%</td>
+                                <td class="text-center"><span class="badge bg-success">Top Tier</span></td>
+                                <td><span class="badge badge-excellent">Sangat Kuat</span></td>
+                                <td>Min. Regulator: 8%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>NPL Gross</strong></td>
+                                <td>2,65%</td>
+                                <td class="text-center"><span class="badge bg-warning">#14</span></td>
+                                <td><span class="badge badge-good">Terkendali</span></td>
+                                <td>Max. Regulator: 5%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategic Recommendations -->
+        <div class="section-header fade-in mt-5">
+            <h2 class="section-title">
+                <i class="fas fa-lightbulb me-3"></i>
+                Strategic Action Items & Recommendations
+            </h2>
+            <p class="section-subtitle">Roadmap strategis berdasarkan analisis komprehensif kinerja Q2 2025</p>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-lg-4">
+                <div class="metric-card fade-in h-100">
+                    <div class="card-icon icon-success">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h5 class="fw-bold text-success mb-3">FOKUS UTAMA</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Pertahankan momentum Unit Syariah (56,14% growth)</li>
+                        <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Optimalisasi CASA ratio syariah (69,23%)</li>
+                        <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Monitoring NPL secara ketat (3,13%)</li>
+                        <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Leverage CAR tinggi untuk ekspansi kredit</li>
+                        <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Maintain ranking 9-10 di antara BPD-SI</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="metric-card fade-in h-100">
+                    <div class="card-icon icon-primary">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </div>
+                    <h5 class="fw-bold text-primary mb-3">EKSPANSI STRATEGIS</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-arrow-right me-2 text-primary"></i>Lanjutkan ekspansi outlet syariah (target 120+ outlet)</li>
+                        <li class="mb-2"><i class="fas fa-arrow-right me-2 text-primary"></i>Penetrasi pasar rural Sulawesi</li>
+                        <li class="mb-2"><i class="fas fa-arrow-right me-2 text-primary"></i>Digital banking enhancement</li>
+                        <li class="mb-2"><i class="fas fa-arrow-right me-2 text-primary"></i>Cross-selling produk syariah di outlet konvensional</li>
+                        <li class="mb-2"><i class="fas fa-arrow-right me-2 text-primary"></i>Strategic partnerships untuk market expansion</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="metric-card fade-in h-100">
+                    <div class="card-icon icon-warning">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h5 class="fw-bold text-warning mb-3">RISK MANAGEMENT</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Strengthen credit risk controls</li>
+                        <li class="mb-2"><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Maintain CAR above 25%</li>
+                        <li class="mb-2"><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Enhance operational efficiency (target BOPO <75%)</li>
+                        <li class="mb-2"><i class="fas fa-exclamation-triangle me-2 text-warning"></i>NPL monitoring & early warning system</li>
+                        <li class="mb-2"><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Diversifikasi portofolio kredit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Executive Summary Footer -->
+        <div class="alert-executive fade-in">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h3 class="mb-3">
+                        <i class="fas fa-chart-bar me-2"></i>
+                        Key Strategic Insights & Takeaways
+                    </h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-star me-2"></i>Kekuatan Utama</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-1">• Unit Syariah berkinerja luar biasa (56,14% asset growth)</li>
+                                <li class="mb-1">• Modal sangat kuat (CAR 28,30%) untuk ekspansi</li>
+                                <li class="mb-1">• Profitabilitas meningkat signifikan (+15,50%)</li>
+                                <li class="mb-1">• Efisiensi operasional membaik (BOPO turun 2,21%)</li>
+                                <li class="mb-1">• Ranking konsisten 9-10 dari 27 BPD-SI</li>
+                                <li class="mb-1">• CASA ratio syariah industry champion (69,23%)</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-eye me-2"></i>Area Perhatian</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-1">• NPL meningkat perlu monitoring ketat (+0,75%)</li>
+                                <li class="mb-1">• Pertumbuhan kredit konvensional moderat (2,13%)</li>
+                                <li class="mb-1">• NIM turun tipis perlu optimalisasi</li>
+                                <li class="mb-1">• Competitive pressure di pasar syariah</li>
+                                <li class="mb-1">• Efisiensi masih bisa dioptimalkan lebih lanjut</li>
+                                <li class="mb-1">• Sustain momentum ekspansi outlet</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <div class="border border-light rounded-3 p-4">
+                        <h4 class="mb-3">Overall Assessment</h4>
+                        <div style="font-size: 4rem; margin: 1rem 0;">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="h2 mb-2 text-warning">EXCELLENT</div>
+                        <div class="h5 mb-2">Performance Q2 2025</div>
+                        <div class="small">
+                            <strong>Ranking 9-10</strong> dari 27 BPD-SI<br>
+                            <strong>Unit Syariah</strong> Market Leader<br>
+                            <strong>Sustainable Growth</strong> Trajectory
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize tooltips and popovers
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Bootstrap tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // Update dashboard timestamp
+            updateDashboardTime();
+            
+            // Initialize animations
+            initializeAnimations();
+            
+            // Add interactive behaviors
+            addInteractiveBehaviors();
+        });
+
+        // Update dashboard time
+        function updateDashboardTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('id-ID', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            const timeElement = document.getElementById('dashboard-time');
+            if (timeElement) {
+                timeElement.textContent = `Dashboard Updated: ${timeString}`;
+            }
+        }
+
+        // Initialize scroll animations
+        function initializeAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 0.6s ease-in-out forwards';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animated elements
+            document.querySelectorAll('.fade-in, .slide-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Animate progress bars on scroll
+            animateProgressBars();
+        }
+
+        // Progress bar animations
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach((bar, index) => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                const width = bar.style.width;
+                                bar.style.width = '0%';
+                                bar.style.transition = 'width 1.5s ease-in-out';
+                                setTimeout(() => {
+                                    bar.style.width = width;
+                                }, 100);
+                            }, index * 100);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                observer.observe(bar.closest('.progress').parentElement);
+            });
+        }
+
+        // Add interactive behaviors
+        function addInteractiveBehaviors() {
+            // Metric card hover effects
+            document.querySelectorAll('.metric-card, .ratio-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-6px) scale(1.02)';
+                    this.style.boxShadow = '0 16px 48px rgba(0, 0, 0, 0.15)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = 'var(--shadow-card)';
+                });
+            });
+
+            // Ranking item click interactions
+            document.querySelectorAll('.ranking-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    // Create notification
+                    showNotification('Detail analisis akan tersedia dalam laporan lengkap', 'info');
+                });
+            });
+
+            // Tab switching effects
+            document.querySelectorAll('[data-bs-toggle="tab"]').forEach(tab => {
+                tab.addEventListener('shown.bs.tab', function() {
+                    // Re-animate elements in the new tab
+                    const targetPane = document.querySelector(this.getAttribute('data-bs-target'));
+                    const elements = targetPane.querySelectorAll('.fade-in');
+                    elements.forEach((el, index) => {
+                        setTimeout(() => {
+                            el.style.animation = 'fadeIn 0.6s ease-in-out forwards';
+                        }, index * 100);
+                    });
+                });
+            });
+        }
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; max-width: 350px;';
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+
+        // Export functionality
+        function exportToPDF() {
+            window.print();
+        }
+
+        // Quick search functionality
+        function searchDashboard(query) {
+            const searchTerm = query.toLowerCase();
+            const cards = document.querySelectorAll('.metric-card, .ratio-card');
+            
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    card.style.border = '2px solid var(--primary-green)';
+                } else {
+                    card.style.display = searchTerm ? 'none' : 'block';
+                    card.style.border = '';
+                }
+            });
+        }
+
+        // Performance monitoring
+        function trackPerformance() {
+            if ('performance' in window) {
+                const loadTime = performance.timing.loadEvent
